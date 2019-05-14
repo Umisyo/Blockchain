@@ -9,9 +9,9 @@ class Block:
         self.timestamp: Optional[str] = timestamp
         self.data: Optional[list] = data
         self.previousHash: Optional[str] = previousHash
-        self.hash: str = self.hashBlock()
-        self.nonce: Optional[int] = None 
         self.diff: int = 4
+        self.nonce: Optional[int] = None 
+        self.hash: str = self.hashBlock()
 
     def hashBlock(self) -> str:
         joinedBlock: dict = {
@@ -19,7 +19,7 @@ class Block:
             'timestamp': self.timestamp,
             'data': self.data,
             'previousHash': self.previousHash,
-            'diff': self.diff
+            'diff': self.diff 
         }
 
         jsonBlock = json.dumps(joinedBlock, sort_keys=True)
