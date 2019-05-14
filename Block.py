@@ -1,6 +1,6 @@
 import hashlib
 import json
-from typing import Optional
+from typing import Optional, Union
 
 class Block:
     def __init__(self, index: int, timestamp: str, data: list, previousHash: str):
@@ -12,6 +12,7 @@ class Block:
         self.nonce: Optional[int] = None 
         self.hash: str = self.hashBlock()
 
+    #ブロックのハッシュ値を計算する関数
     def hashBlock(self) -> str:
         joinedBlock: dict = {
             'index': self.index,
@@ -24,24 +25,6 @@ class Block:
         jsonBlock: str = json.dumps(joinedBlock, sort_keys=True)
 
         return hashlib.sha256(jsonBlock.encode('ascii')).hexdigest()
-
-    def toJson(self) -> bool or str:
-        if self.nonce == None:
-            return False
-
-        joinedBlock: dict = {
-            'index': self.index,
-            'timestamp': self.timestamp,
-            'data': self.data,
-            'previousHash': self.previousHash,
-            'diff': self.diff,
-            'hash': self.hash,
-            'nonce': self.nonce
-        }
-
-        jsonBlock: str = json.dumps(joinedBlock, sort_keys=True)
-
-        return jsonBlock
 
     def checkNonce(self, nonce: int) -> bool:
         nonceJoined: str = self.hash + str(nonce)
