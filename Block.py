@@ -44,3 +44,12 @@ class Block:
 
         return jsonBlock
 
+    def checkNonce(self, nonce):
+        nonceJoined = self.hash + str(nonce)
+        calced = hashlib.sha256(nonceJoined.encode('ascii')).hexdigest()
+
+        if calced[:self.diff:].count('0') == self.diff:
+            return True
+        else:
+            return False
+
