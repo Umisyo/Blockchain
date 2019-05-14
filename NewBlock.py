@@ -8,3 +8,5 @@ class NewBlock(Block):
         self.data = list(input('please input data for new block.\n') + str(self.index))
         self.previousHash = lastBlock.hash
         self.hash = self.hashBlock()
+        self.nonce = None
+        self.diff = 4

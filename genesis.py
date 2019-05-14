@@ -8,3 +8,5 @@ class genesisBlock(Block):
         self.timestamp = str(datetime.now())
         self.previousHash = '0'
         self.hash = self.hashBlock()
+        self.nonce = None
+        self.diff = 4

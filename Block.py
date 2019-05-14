@@ -11,7 +11,7 @@ class Block:
         self.previousHash: Optional[str] = None
         self.hash: str = self.hashBlock()
         self.nonce: Optional[int] = None
-        self.diff: int = 4
+        self.diff: int = 0
 
     def hashBlock(self) -> str:
         joinedBlock: dict = {
