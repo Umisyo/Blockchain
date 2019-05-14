@@ -1,19 +1,31 @@
-from genesis import genesisBlock
-from NewBlock import NewBlock 
+import hashlib
+from datetime import datetime
+from Block import Block
 
-genesisblock = genesisBlock()
-BlockChain = []
+blockChain: list = [] 
 
-BlockChain.append(genesisblock)
+def main():
+    genesisBlock: Block = Block(0, str(datetime.now()), [], '-')
+    appendData: dict = {'genesis': input('please input data for genesis block:')}
+    nonce = genesisBlock.miningCoin(appendData)
+    genesisBlock.nonce = nonce
 
-previousBlock = BlockChain[0]
+    blockChain.append(genesisBlock)
 
-num: int = int(input('How many block do you add?'))
+    num: int = int(input('How many blocks do you make?:'))
 
-for i in range(num):
-    newblock = NewBlock(previousBlock)
-    BlocksToAdd = newblock
-    BlockChain.append(BlocksToAdd)
-    previousBlock = BlocksToAdd
-    print('Block {} has been added to the chain\n'.format(BlocksToAdd.index) + 'Hash: {}'.format(BlocksToAdd.previousHash))
+    for i in range(num):
+        newBlock: Block = Block(i + 1, str(datetime.now()), [], blockChain[i].hash)
+        appendData: dict = {'data': input('please input data for block{}:'.format(i + 1))}
+        nonce = newBlock.miningCoin(appendData)
+        newBlock.nonce = nonce
+        blockChain.append(newBlock)
 
+    for block in blockChain:
+        nonceJoined: str = block.hash + str(block.nonce)
+        calced: str = hashlib.sha256(nonceJoined.encode('ascii')).hexdigest()
+
+        print("index =", block.index ,"sha256(", block.hash, "+", block.nonce, ") =", calced)
+
+if __name__ == "__main__":
+    main()
