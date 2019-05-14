@@ -18,9 +18,29 @@ class Block:
             'index': self.index,
             'timestamp': self.timestamp,
             'data': self.data,
-            'previousHash': self.previousHash
+            'previousHash': self.previousHash,
+            'diff': self.diff
         }
 
         jsonBlock = json.dumps(joinedBlock, sort_keys=True)
 
         return hashlib.sha256(jsonBlock.encode('ascii')).hexdigest()
+
+    def toJson(self):
+        if self.nonce == None:
+            return False
+
+        joinedBlock: dict = {
+            'index': self.index,
+            'timestamp': self.timestamp,
+            'data': self.data,
+            'previousHash': self.previousHash,
+            'diff': self.diff,
+            'hash': self.hash,
+            'nonce': self.nonce
+        }
+
+        jsonBlock = json.dumps(joinedBlock, sort_keys=True)
+
+        return jsonBlock
+
