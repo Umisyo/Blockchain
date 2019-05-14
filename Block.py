@@ -1,5 +1,6 @@
 from datetime import datetime
 import hashlib
+import json
 from typing import Optional
 
 class Block:
@@ -13,15 +14,13 @@ class Block:
         self.diff: int = 4
 
     def hashBlock(self):
-        sha = hashlib.sha256()
-        
-        sha.update(
-            (
-                str(self.index) + 
-                self.timestamp + 
-                self.data + 
-                self.previousHash
-            ).encode('utf-8')
-        )
-        
-        return sha.hexdigest()
+        joinedBlock: dict = {
+            'index': self.index,
+            'timestamp': self.timestamp,
+            'data': self.data,
+            'previousHash': self.previousHash
+        }
+
+        jsonBlock = json.dumps(joinedBlock, sort_keys=True)
+
+        return hashlib.sha256(jsonBlock.encode('ascii')).hexdigest()
