@@ -5,6 +5,7 @@ from Block import Block
 blockChain: list = [] 
 
 def main():
+    #最初のブロックの作成
     genesisBlock: Block = Block(0, str(datetime.now()), [], '-')
     appendData: dict = {'genesis': input('please input data for genesis block:')}
     nonce: int = genesisBlock.miningCoin(appendData)
@@ -12,6 +13,7 @@ def main():
 
     blockChain.append(genesisBlock)
 
+    #指定回数ブロックを作成する
     num: int = int(input('How many blocks do you make?:'))
 
     for i in range(num):
@@ -21,6 +23,7 @@ def main():
         newBlock.nonce = nonce
         blockChain.append(newBlock)
 
+    #作成したブロックのindex,ブロックそのもののhash値, マイニングで求めた変数n, 最終的に得られるhash値を表示する
     for block in blockChain:
         nonceJoined: str = block.hash + str(block.nonce)
         calced: str = hashlib.sha256(nonceJoined.encode('ascii')).hexdigest()

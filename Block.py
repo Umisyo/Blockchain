@@ -26,6 +26,7 @@ class Block:
 
         return hashlib.sha256(jsonBlock.encode('ascii')).hexdigest()
 
+    #変数nの真偽をチェックする
     def checkNonce(self, nonce: int) -> bool:
         nonceJoined: str = self.hash + str(nonce)
         calced: str = hashlib.sha256(nonceJoined.encode('ascii')).hexdigest()
@@ -35,6 +36,7 @@ class Block:
         else:
             return False
 
+    #hash値の先頭diff桁が0になるまでnonceを総当たりで求める
     def miningCoin(self, appendData: dict) -> int:
         nonce: int = 0
 
