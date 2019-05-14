@@ -4,14 +4,14 @@ import json
 from typing import Optional
 
 class Block:
-    def __init__(self):
-        self.index: int = 0 
-        self.timestamp: Optional[str] = None
-        self.data: Optional[list] = None
-        self.previousHash: Optional[str] = None
+    def __init__(self, index: int, timestamp: str, data: list, previousHash: str):
+        self.index: int = index 
+        self.timestamp: Optional[str] = timestamp
+        self.data: Optional[list] = data
+        self.previousHash: Optional[str] = previousHash
         self.hash: str = self.hashBlock()
-        self.nonce: Optional[int] = None
-        self.diff: int = 0
+        self.nonce: Optional[int] = None 
+        self.diff: int = 4
 
     def hashBlock(self) -> str:
         joinedBlock: dict = {
