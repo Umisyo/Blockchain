@@ -22,7 +22,7 @@ class Block:
             'diff': self.diff 
         }
 
-        jsonBlock = json.dumps(joinedBlock, sort_keys=True)
+        jsonBlock: str = json.dumps(joinedBlock, sort_keys=True)
 
         return hashlib.sha256(jsonBlock.encode('ascii')).hexdigest()
 
@@ -40,13 +40,13 @@ class Block:
             'nonce': self.nonce
         }
 
-        jsonBlock = json.dumps(joinedBlock, sort_keys=True)
+        jsonBlock: str = json.dumps(joinedBlock, sort_keys=True)
 
         return jsonBlock
 
     def checkNonce(self, nonce: int) -> bool:
-        nonceJoined = self.hash + str(nonce)
-        calced = hashlib.sha256(nonceJoined.encode('ascii')).hexdigest()
+        nonceJoined: str = self.hash + str(nonce)
+        calced: str = hashlib.sha256(nonceJoined.encode('ascii')).hexdigest()
 
         if calced[:self.diff:].count('0') == self.diff:
             return True

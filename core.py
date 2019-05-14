@@ -7,7 +7,7 @@ blockChain: list = []
 def main():
     genesisBlock: Block = Block(0, str(datetime.now()), [], '-')
     appendData: dict = {'genesis': input('please input data for genesis block:')}
-    nonce = genesisBlock.miningCoin(appendData)
+    nonce: int = genesisBlock.miningCoin(appendData)
     genesisBlock.nonce = nonce
 
     blockChain.append(genesisBlock)
@@ -26,6 +26,8 @@ def main():
         calced: str = hashlib.sha256(nonceJoined.encode('ascii')).hexdigest()
 
         print("index =", block.index ,"sha256(", block.hash, "+", block.nonce, ") =", calced)
+
+    return 0
 
 if __name__ == "__main__":
     main()
