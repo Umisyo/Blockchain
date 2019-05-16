@@ -3,10 +3,10 @@ import json
 from typing import Optional, Union
 
 class Block:
-    def __init__(self, index: int, timestamp: str, data: list, previousHash: str):
+    def __init__(self, index: int, timestamp: str, transaction: list, previousHash: str):
         self.index: int = index 
         self.timestamp: Optional[str] = timestamp
-        self.data: Optional[list] = data
+        self.transaction: Optional[list] = transaction
         self.previousHash: Optional[str] = previousHash
         self.diff: int = 4
         self.nonce: Optional[int] = None 
@@ -17,7 +17,7 @@ class Block:
         joinedBlock: dict = {
             'index': self.index,
             'timestamp': self.timestamp,
-            'data': self.data,
+            'transaction': self.transaction,
             'previousHash': self.previousHash,
             'diff': self.diff 
         }
@@ -37,10 +37,10 @@ class Block:
             return False
 
     #hash値の先頭diff桁が0になるまでnonceを総当たりで求める
-    def miningCoin(self, appendData: dict) -> int:
+    def miningCoin(self, appendtransaction: dict) -> int:
         nonce: int = 0
 
-        self.data.append(appendData)
+        self.transaction.append(appendtransaction)
         self.hash = self.hashBlock()
 
         while True:
