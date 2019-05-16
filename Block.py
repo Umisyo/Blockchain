@@ -1,11 +1,12 @@
 import hashlib
 import json
 from typing import Optional, Union
+from datetime import datetime
 
 class Block:
-    def __init__(self, index: int, timestamp: str, transaction: list, previousHash: str):
+    def __init__(self, index: int, transaction: list, previousHash: str):
         self.index: int = index 
-        self.timestamp: Optional[str] = timestamp
+        self.timestamp: Optional[str] = str(datetime.now())
         self.transaction: Optional[list] = transaction
         self.previousHash: Optional[str] = previousHash
         self.diff: int = 4

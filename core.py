@@ -6,7 +6,7 @@ blockChain: list = []
 
 def main():
     #最初のブロックの作成
-    genesisBlock: Block = Block(0, str(datetime.now()), [], '-')
+    genesisBlock: Block = Block(0, [], '-')
     appendTransaction: dict = {'genesis': input('please input Transaction for genesis block:')}
     nonce: int = genesisBlock.miningCoin(appendTransaction)
     genesisBlock.nonce = nonce
@@ -17,7 +17,7 @@ def main():
     num: int = int(input('How many blocks do you make?:'))
 
     for i in range(num):
-        newBlock: Block = Block(i + 1, str(datetime.now()), [], blockChain[i].hash)
+        newBlock: Block = Block(i + 1, [], blockChain[i].hash)
         appendTransaction: dict = {'Transaction': input('please input Transaction for block{}:'.format(i + 1))}
         nonce = newBlock.miningCoin(appendTransaction)
         newBlock.nonce = nonce
