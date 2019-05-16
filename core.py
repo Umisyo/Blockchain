@@ -6,7 +6,7 @@ blockChain: list = []
 
 def main():
     #最初のブロックの作成
-    genesisBlock: Block = Block(0, str(datetime.now()), [], '-')
+    genesisBlock: Block =  Block(0, str(datetime.now()), [], '-')
     appendData: dict = {'genesis': input('please input data for genesis block:')}
     nonce: int = genesisBlock.miningCoin(appendData)
     genesisBlock.nonce = nonce
