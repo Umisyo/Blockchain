@@ -14,7 +14,18 @@ def main():
     blockChain.append(genesisBlock)
 
     #指定回数ブロックを作成する
-    num: int = int(input('How many blocks do you make?:'))
+    inputNum = ''
+    num: int = 0
+
+    while inputNum.isdigit() == False:
+        inputNum = input('How many blocks do you make?:')
+
+        if inputNum.isdigit() == False:
+            print('please input integer')
+        
+        else:
+            num: int = int(inputNum)
+
 
     for i in range(num):
         newBlock: Block = Block(i + 1, [], blockChain[i].hash)
@@ -30,7 +41,7 @@ def main():
 
         print("index =", block.index ,"sha256(", block.hash, "+", block.nonce, ") =", calced)
 
-    return 0
+    return 0 
 
 if __name__ == "__main__":
     main()
